@@ -40,7 +40,7 @@ function MessageCard({
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, delay: index * 0.1, ease: 'easeOut' }}
-      className="glass-card p-6 relative overflow-hidden group"
+      className="glass-card px-9 py-7 relative overflow-hidden group"
     >
       {/* Gradient border top */}
       <div

@@ -32,7 +32,7 @@ function TimelineItem({
       initial={{ opacity: 0, x: -20 }}
       animate={inView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="relative mb-8 last:mb-0"
+      className="relative mb-8 last:mb-0 pt-[8px]"
     >
       {/* Dot */}
       <div
@@ -40,12 +40,13 @@ function TimelineItem({
         style={{
           background: 'linear-gradient(135deg, #8b5cf6, #ff6b9d)',
           boxShadow: '0 0 12px rgba(139,92,246,0.5)',
+          top: '8px', // Align dot with the new padding top
         }}
       >
         {item.icon}
       </div>
 
-      <div className="glass-card p-4 ml-3">
+      <div className="glass-card px-6 py-5 ml-3">
         <h3 className="text-sm font-bold gradient-pink mb-1">{item.label}</h3>
         <p className="text-[#c4b5fd] text-xs leading-relaxed">{item.desc}</p>
       </div>
