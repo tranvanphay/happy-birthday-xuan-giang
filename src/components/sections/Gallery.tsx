@@ -1,8 +1,7 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import Image from 'next/image';
 
 const PHOTOS = [
   {
@@ -11,6 +10,7 @@ const PHOTOS = [
     rotate: -3,
     delay: 0,
     fallbackEmoji: '📸',
+    gradient: 'linear-gradient(135deg, hsl(260, 60%, 20%), hsl(290, 60%, 15%))',
   },
   {
     src: '/photos/photo2.jpg',
@@ -18,6 +18,7 @@ const PHOTOS = [
     rotate: 2,
     delay: 0.1,
     fallbackEmoji: '🌟',
+    gradient: 'linear-gradient(135deg, hsl(290, 60%, 20%), hsl(320, 60%, 15%))',
   },
   {
     src: '/photos/photo3.jpg',
@@ -25,6 +26,7 @@ const PHOTOS = [
     rotate: -2,
     delay: 0.2,
     fallbackEmoji: '💖',
+    gradient: 'linear-gradient(135deg, hsl(320, 60%, 20%), hsl(350, 60%, 15%))',
   },
   {
     src: '/photos/photo4.jpg',
@@ -32,18 +34,20 @@ const PHOTOS = [
     rotate: 3,
     delay: 0.3,
     fallbackEmoji: '✨',
+    gradient: 'linear-gradient(135deg, hsl(220, 60%, 20%), hsl(260, 60%, 15%))',
   },
 ];
 
 function PhotoCard({
   photo,
-  index,
 }: {
   photo: (typeof PHOTOS)[0];
   index: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
+  const [imgError, setImgError] = useState(false);
+  const [imgLoaded, setImgLoaded] = useState(false);
 
   return (
     <motion.div
@@ -65,23 +69,27 @@ function PhotoCard({
         }}
       >
         <div className="relative w-full aspect-square rounded-xl overflow-hidden">
-          {/* Gradient fallback background */}
+          {/* Gradient background - always visible as fallback */}
           <div
             className="absolute inset-0 flex items-center justify-center text-6xl"
-            style={{
-              background: `linear-gradient(135deg, hsl(${260 + index * 30}, 60%, 20%), hsl(${300 + index * 30}, 60%, 15%))`,
-            }}
+            style={{ background: photo.gradient }}
           >
-            {photo.fallbackEmoji}
+            {(imgError || !imgLoaded) && photo.fallbackEmoji}
           </div>
-          {/* Actual image on top */}
-          <Image
-            src={photo.src}
-            alt={photo.caption}
-            fill
-            className="object-cover"
-            style={{ position: 'absolute' }}
-          />
+
+          {/* Real photo - loads on top, gracefully falls back on error */}
+          {!imgError && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={photo.src}
+              alt={photo.caption}
+              onLoad={() => setImgLoaded(true)}
+              onError={() => setImgError(true)}
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ opacity: imgLoaded ? 1 : 0, transition: 'opacity 0.3s' }}
+            />
+          )}
+
           {/* Shine overlay */}
           <div
             className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500"
