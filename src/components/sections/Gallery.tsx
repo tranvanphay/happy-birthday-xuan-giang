@@ -5,7 +5,7 @@ import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 
 const PHOTOS = [
   {
-    src: '/photos/photo1.jpg',
+    src: '/photos/photo1.png',
     caption: 'Khoảnh khắc tuyệt vời 🌸',
     rotate: -3,
     delay: 0,
@@ -13,7 +13,7 @@ const PHOTOS = [
     gradient: 'linear-gradient(135deg, hsl(260, 60%, 20%), hsl(290, 60%, 15%))',
   },
   {
-    src: '/photos/photo2.jpg',
+    src: '/photos/photo2.png',
     caption: 'Nụ cười rạng rỡ ✨',
     rotate: 2,
     delay: 0.1,
@@ -21,7 +21,7 @@ const PHOTOS = [
     gradient: 'linear-gradient(135deg, hsl(290, 60%, 20%), hsl(320, 60%, 15%))',
   },
   {
-    src: '/photos/photo3.jpg',
+    src: '/photos/photo3.png',
     caption: 'Kỷ niệm đẹp 💫',
     rotate: -2,
     delay: 0.2,
@@ -29,7 +29,7 @@ const PHOTOS = [
     gradient: 'linear-gradient(135deg, hsl(320, 60%, 20%), hsl(350, 60%, 15%))',
   },
   {
-    src: '/photos/photo4.jpg',
+    src: '/photos/photo4.png',
     caption: 'Mãi bên nhau 💖',
     rotate: 3,
     delay: 0.3,
