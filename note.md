@@ -1,0 +1,2 @@
+- Nội dung trong message card (function MessageCard) padding all thêm 5px
+- Các time line (TimelineItem) padding top 8px. Nội dung bên trong padding all thêm 5px
